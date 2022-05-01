@@ -23,7 +23,7 @@ function userPlay() {
     return playerSelection;
 }
 
-//If user wins, return 1, if computer wins, return 0.
+// If user wins, return 1, if computer wins, return 0.
 
 function playRound(compSelection,playerSelection) {
     if (playerSelection == 'rock') {
@@ -83,7 +83,7 @@ function game() {
         } else if (round == 2) {
             i--;
         }
-        console.log(`Score is User| ${playerScore} to ${compScore} |Computer`);
+        console.log(`Score is (User) ${playerScore} to ${compScore} (Computer)`);
         i++;
     }
     return; 

@@ -1,3 +1,64 @@
+const defaultDomState = document.body.innerHTML;
+
+const btn = document.querySelectorAll('button:not(.reset)');
+    for (let i = 0; i < btn.length; i++) {
+        if (btn[i]) {
+            btn[i].addEventListener("click", function() {
+                this.playSel = btn[i].innerText.toLowerCase();
+                this.compSel = computerPlay();
+                round = playRound(this.compSel, this.playSel);
+                userScore = document.querySelector('.user-score');
+                newUserScore = parseInt(userScore.innerText);
+                cpuScore = document.querySelector('.cpu-score');
+                newCpuScore = parseInt(cpuScore.innerText);
+                gameText = document.querySelector('.winner-declaration');
+                if (round == 0) {
+                    newCpuScore++;
+                    cpuScore.innerText = newCpuScore;
+                    if (newCpuScore >= 2){ //Added high score for UI update, should be 3
+                        gameText.innerText += "\n Game Over! The Computer WON!";
+                        for (let j = 0; j < btn.length; j++) btn[j].disabled = true;
+                        // return;
+                    }
+                } else if (round == 1) {
+                    newUserScore++;
+                    userScore.innerText = newUserScore;
+                    if (newUserScore >= 2) { //Added high score for UI update, should be 3
+                        gameText.innerText += "\n Congratulations! You WON!!!!";
+                        for (let j = 0; j < btn.length; j++) btn[j].disabled = true;
+                        // return;
+                    }
+                } else if (round == 2) {
+                    return;
+                }
+            })
+        }
+    }
+
+
+const resetBtn = document.querySelector('.reset');
+    resetBtn.addEventListener("click", function() {
+        document.querySelector('.user-score').innerText = 0;
+        document.querySelector('.cpu-score').innerText = 0;
+        document.querySelector('.winner-declaration').innerText = "Play RPS against the CPU! Make your selection below:";
+        for (let j = 0; j < btn.length; j++) btn[j].disabled = false;
+    })
+
+// function buttonClick() {
+//     let playSel;
+//     const btn = document.querySelectorAll('button');
+//     for (let i = 0; i < btn.length; i++) {
+//         if (btn[i]) {
+//             btn[i].addEventListener("click", function() {
+//                 playSel = btn[i].innerText.toLowerCase();
+
+//             })
+//             compSel = computerPlay();
+//             playRound(compSel, playSel);
+//         }
+//     }
+// }
+
 
 function computerPlay() {
     let compRand = Math.floor(Math.random()*9)+1;
@@ -26,35 +87,38 @@ function userPlay() {
 // If user wins, return 1, if computer wins, return 0.
 
 function playRound(compSelection,playerSelection) {
+    gameText = document.querySelector('.winner-declaration');
     if (playerSelection == 'rock') {
         if (compSelection == 'scissors') {
-            console.log("You Win! Rock beats Scissors!");
+            gameText.innerText = "You Win! Rock beats Scissors!";
             return 1;
         } else if (compSelection == 'paper') {
-            console.log("You Loser! Paper beats Rock!");
+            gameText.innerText = "You Loser! Paper beats Rock!";
             return 0;
         } else {
-            console.log("You both selected Rock! Try again.");
+            gameText.innerText = "You both selected Rock! Try again.";
             return 2;
         }
    }if (playerSelection == 'paper') {
         if (compSelection == 'rock') {
-            console.log("You Win! Paper beats Rock!");
+            gameText.innerText = "You Win! Paper beats Rock!";
             return 1;
         } else if (compSelection == 'scissors') {
-            console.log("You Loser! Scissors beat Paper!"); 
+            gameText.innerText = "You Loser! Scissors beat Paper!"; 
             return 0;
         } else {
-            console.log("You both selected Paper! Try again.");
+            gameText.innerText = "You both selected Paper! Try again.";
             return 2;
         }
    }if (playerSelection == 'scissors') {
         if (compSelection == 'paper') {
-            console.log("You Win! Scissors beat Paper!");
+            gameText.innerText = "You Win! Scissors beat Paper!";
+            return 1;
         } else if (compSelection == 'rock') {
-            console.log("You Loser! Rock beats Scissors!");
+            gameText.innerText = "You Loser! Rock beats Scissors!";
+            return 0;
         } else {
-            console.log("You both selected Scissors! Try again.");
+            gameText.innerText = "You both selected Scissors! Try again.";
             return 2;
         }
     }
@@ -64,19 +128,19 @@ let compScore = 0;
 let playerScore = 0;
 
 function game() {
-    for (let i=0; i<5; i){
+    for (let i=0; i<5; i) {
         let compSelection = computerPlay();
-        let playerSelection = userPlay();
+        let playerSelection = buttonClick(); //userPlay();
         let round = playRound(compSelection,playerSelection);
         if (round == 0) {
-            compScore = compScore+1;
-            if (compScore >= 3){
+            compScore++;
+            if (compScore >= 100){ //Added high score for UI update, should be 3
                 console.log("Game Over! The Computer WON!");
                 break;
             }
         } else if (round == 1) {
             playerScore++;
-            if (playerScore >= 3) {
+            if (playerScore >= 100) { //Added high score for UI update, should be 3
                 console.log("Congratulations! You WON!!!!");
                 break;
             }
@@ -89,4 +153,4 @@ function game() {
     return; 
 }
 
-game();
+// game();

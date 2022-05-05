@@ -15,7 +15,7 @@ const btn = document.querySelectorAll('button:not(.reset)');
                 if (round == 0) {
                     newCpuScore++;
                     cpuScore.innerText = newCpuScore;
-                    if (newCpuScore >= 2){ //Added high score for UI update, should be 3
+                    if (newCpuScore >= 6){ //Added high score for UI update, should be 3
                         gameText.innerText += "\n Game Over! The Computer WON!";
                         for (let j = 0; j < btn.length; j++) btn[j].disabled = true;
                         // return;
@@ -23,7 +23,7 @@ const btn = document.querySelectorAll('button:not(.reset)');
                 } else if (round == 1) {
                     newUserScore++;
                     userScore.innerText = newUserScore;
-                    if (newUserScore >= 2) { //Added high score for UI update, should be 3
+                    if (newUserScore >= 6) { //Added high score for UI update, should be 3
                         gameText.innerText += "\n Congratulations! You WON!!!!";
                         for (let j = 0; j < btn.length; j++) btn[j].disabled = true;
                         // return;

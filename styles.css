@@ -3,7 +3,8 @@ body, .container {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: aquamarine;
+    background-color: rgb(48, 48, 48);
+    color: white;
     font-family: 'Arial', sans-serif;
 }
 
@@ -30,12 +31,12 @@ button {
     border: none;
     background-color: white;
     border-radius: 4px;
-    width: 60px;
+    width: 80px;
     height: 30px;
 }
 
 button:disabled {
-    background-color: rgb(189, 189, 189);
+    background-color: rgb(110, 110, 110);
     color: black;
     transition: 0.3s;
 }
